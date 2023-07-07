@@ -4,6 +4,7 @@ import HeaderImage from '../../components/Home/HeaderImage';
 import MealSummary from '../../components/Home/mealSummary';
 import MealItem from '../../components/Home/mealItem'
 import styles from './index.module.css'
+import CartModal from '../../customModals/CartModal';
 
 import { DUMMY_MEALS } from '../../constantData/MealList'
 
@@ -22,6 +23,9 @@ const Home = (props) => {
                     {DUMMY_MEALS.map(item => <MealItem item={item} key={item?.id} /> )}
                 </div>
             </div>
+
+            {/* CART MODAL */}
+            <CartModal />
         </Fragment>
     );
 }

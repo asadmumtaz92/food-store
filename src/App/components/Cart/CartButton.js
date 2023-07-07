@@ -3,7 +3,7 @@ import CartIcon from './cartIcon'
 
 const CartButton = (props) => {
     return (
-        <button className={styles.button}>
+        <button className={styles.button} data-toggle="modal" data-target="#myModal">
             <span className={styles.icon}>
                 <CartIcon />
             </span>
