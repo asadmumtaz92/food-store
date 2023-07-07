@@ -66,7 +66,12 @@ const CartModal = (props) => {
                             }
 
                             <div className={styles.ftr}>
-                                <button type="button" className={`btn btn-secondary`} data-dismiss="modal">Checkout</button>
+                                <button
+                                    type="button" className={`btn btn-secondary`} data-dismiss="modal"
+                                    onClick={() => { props?.activeScreenHandler('Checkout') }}
+                                >
+                                    Checkout
+                                </button>
                             </div>
                         </div>
 

@@ -5,12 +5,15 @@ import MealSummary from '../../components/Home/mealSummary';
 import MealItem from '../../components/Home/mealItem'
 import styles from './index.module.css'
 import CartModal from '../../customModals/CartModal';
+import Cart from './Cart';
 
 import { DUMMY_MEALS } from '../../constantData/MealList'
+
 
 const Home = (props) => {
 
     const [cartItems, setCartItems] = useState([])
+    const [activeScreen, setActiveScreen] = useState('Home')
 
     const addToCart = (newItem) => {
         if (cartItems.length > 0) {
@@ -19,8 +22,8 @@ const Home = (props) => {
             if (result?.length > 0) {
                 console.log('Merge', newItem?.id)
 
-                const noEdit = cartItems.filter(item => item?.id != newItem?.id )
-                const editItem = cartItems.filter(item => item?.id == newItem?.id)
+                const noEdit = cartItems.filter(item => item?.id !== newItem?.id )
+                const editItem = cartItems.filter(item => item?.id === newItem?.id)
 
                 let updatedItem = {
                     ...editItem[0],
@@ -48,23 +51,35 @@ const Home = (props) => {
             setCartItems(updatedArray)
         }
     }
+    const activeScreenHandler = (screen) => {
+        setTimeout(() => {
+            setActiveScreen(screen)
+        }, 500);
+    }
+
+    let content = <>
+        <Header cartLength={cartItems?.length} />
+        <HeaderImage />
+
+        <MealSummary />
+        <div className={`container`}>
+            <h2 className={styles.title}>AVAILABLE FOODS</h2>
+
+            <div className={`row ${styles.myRow}`} >
+                {DUMMY_MEALS.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
+            </div>
+        </div>
+
+        {/* CART MODAL */}
+        <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
+    </>
     
     return (
         <Fragment>
-            <Header cartLength={cartItems?.length} />
-            <HeaderImage />
-
-            <MealSummary />
-            <div className={`container`}>
-                <h2 className={styles.title}>AVAILABLE FOODS</h2>
-
-                <div className={`row ${styles.myRow}`} >
-                    {DUMMY_MEALS.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} /> )}
-                </div>
-            </div>
-
-            {/* CART MODAL */}
-            <CartModal cartItems={cartItems} />
+            {activeScreen === 'Home'
+                ? content
+                : < Cart cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
+            }
         </Fragment>
     );
 }
