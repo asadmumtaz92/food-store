@@ -1,5 +1,4 @@
 import burger from '../assets/images/foodItemIcon.png'
-import pizza from '../assets/images/pizza.png'
 export const DUMMY_MEALS = [
     {
         id: 'm1',

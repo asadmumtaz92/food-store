@@ -7,10 +7,11 @@ const CartModal = (props) => {
 
     const [total, setTotal] = useState(null)
 
+    // CALCULATE TOTAL PRICE
     useEffect(() => {
         let ttt = 0
         props?.cartItems.map(item => {
-            let t = item?.item?.price * item?.qty + ttt
+            let t = item?.price * item?.qty + ttt
             ttt = t
             setTotal(t)
         })
@@ -18,8 +19,7 @@ const CartModal = (props) => {
 
     const CartItem = (item) => {
 
-        let itemDetail = item?.item?.item
-        let qty = item?.item?.qty
+        let itemDetail = item?.item
 
         return (
             <div className={styles.cartItem}>
@@ -28,8 +28,8 @@ const CartModal = (props) => {
                 <div className={styles.descBox}>
                     <p className={styles.title}>{itemDetail?.name}</p>
                     <p className={styles.price}>{formatter.format(itemDetail?.price)}</p>
-                    <p className={styles.qty}>{qty}</p>
-                    <p className={styles.total}>{formatter.format(itemDetail?.price * qty)}</p>
+                    <p className={styles.qty}>{itemDetail?.qty}</p>
+                    <p className={styles.total}>{formatter.format(itemDetail?.price * itemDetail?.qty)}</p>
                 </div>
             </div>
         )
@@ -44,27 +44,30 @@ const CartModal = (props) => {
 
                         {/* <!-- Modal Header --> */}
                         <div className={`modal-header`}>
-                            <h4 className={`modal-title`}>Your Cart</h4>
+                            <h4 className={`modal-title ${styles.modalTitle}`}>Your Cart</h4>
                             <button type="button" className={`close`} data-dismiss="modal">&times;</button>
                         </div>
 
                         {/* <!-- Modal body --> */}
-                        <div className={`modal-body`}>
-                            {props?.cartItems.length < 1 && <h4>No Item Found In Your Cart</h4>}
-                            {props?.cartItems.map(item => <CartItem item={item} key={item?.item?.id} /> )}
-                            
+                        <div className={`modal-body ${styles.mBody}`}>
+                            {props?.cartItems?.length > 0
+                                ? props?.cartItems.map(item => <CartItem item={item} key={item?.item?.id} />)
+                                : <h4> No Item Found In Your Cart</h4>
+                            }
+                        </div>
+
+                        {/* <!-- Modal footer --> */}
+                        <div className={`modal-footer ${styles.footer}`}>
                             {total > 0
                                 && <div className={styles.priceBox}>
                                     <h4>Total Amount:</h4>
                                     <h4>{formatter.format(total)}</h4>
                                 </div>
                             }
-                        </div>
 
-                        {/* <!-- Modal footer --> */}
-                        <div className={`modal-footer ${styles.ftr}`}>
-                            <button type="button" className={`btn btn-secondary`} data-dismiss="modal">Close</button>
-                            <button type="button" className={`btn btn-secondary`} data-dismiss="modal">Checkout</button>
+                            <div className={styles.ftr}>
+                                <button type="button" className={`btn btn-secondary`} data-dismiss="modal">Checkout</button>
+                            </div>
                         </div>
 
                     </div>

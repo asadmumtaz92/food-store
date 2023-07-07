@@ -1,8 +1,12 @@
 .modaal {
     font-family: 'Courier New', Courier, monospace;
 }
-h4 {
+.modalTitle {
     font-weight: 700;
+}
+.mBody {
+    max-height: 20rem;
+    overflow: scroll;
 }
 .cartItem {
     border-bottom: 1px solid lightgray;
@@ -10,6 +14,10 @@ h4 {
     margin-bottom: 15px;
     flex-direction: row;
     display: flex;
+}
+.cartItem:last-child {
+    margin-bottom: 0px;
+    border: none;
 }
 .image {
     margin-right: 10px;
@@ -33,22 +41,28 @@ h4 {
 .descBox p:first-child {
     text-align: left !important;
 }
+.footer {
+    flex-direction: column;
+    display: flex;
+}
 .priceBox {
     justify-content: space-between;
     flex-direction: row;
-    margin-top: 20px;
+    padding: 0 1%;
     display: flex;
+    width: 100%;
 }
 .ftr {
-    display: flex;
+    justify-content: flex-end;
     flex-direction: row;
-    justify-content: space-between;
-    padding-left: 10%;
-    padding-right: 10%;
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    padding-right: 10px;
 }
 .ftr button {
-    font-weight: 900;
-    padding: 5px 25px;
     text-transform: uppercase;
     letter-spacing: 1.3px;
+    padding: 5px 25px;
+    font-weight: 900;
 }

@@ -8,11 +8,12 @@ const MealItem = (props) => {
     const [qty, setQty] = useState(1)
 
     const qtyHandler = (event) => {
-        setQty(event?.target?.value)
+        setQty(+event?.target?.value)
     }
     const addToCartHandler = () => {
         let items = {
-            item, ...{ qty: qty }
+            ...item,
+            qty: Number(qty)
         }
         props?.addToCart(items)
         setQty(1)
@@ -21,7 +22,7 @@ const MealItem = (props) => {
     return (
         <div className={`col-sm-4 ${styles.mealItem}`}>
             <div className={styles.innerItem}>
-                <img src={item?.image} alt='Food Image' className={styles.image} />
+                <img src={item?.image} alt={'food image...'} className={styles.image} />
                 <h3>{item?.name}</h3>
                 <p>{item?.description}</p>
                 <h4>{formatter.format(item?.price)}</h4>

@@ -13,8 +13,40 @@ const Home = (props) => {
     const [cartItems, setCartItems] = useState([])
 
     const addToCart = (newItem) => {
-        let updatedArray = [newItem, ...cartItems];
-        setCartItems(updatedArray)
+        if (cartItems.length > 0) {
+            const result = cartItems.filter(item => item?.id.toLowerCase().includes(newItem?.id.toLowerCase()))
+
+            if (result?.length > 0) {
+                console.log('Merge', newItem?.id)
+
+                const noEdit = cartItems.filter(item => item?.id != newItem?.id )
+                const editItem = cartItems.filter(item => item?.id == newItem?.id)
+
+                let updatedItem = {
+                    ...editItem[0],
+                    qty: editItem[0].qty + newItem?.qty
+                }
+                let newArray = [...noEdit, updatedItem]
+                setCartItems(newArray)
+                
+                // let indexNo = cartItems.findIndex(item => item?.id === newItem?.id)
+                // let oldData = cartItems[indexNo]
+                // let updatedQty = {
+                //     ...oldData,
+                //     qty: oldData?.qty + newItem?.qty
+                // }
+                // cartItems[indexNo] = updatedQty
+            }
+            else {
+                console.log('Add')
+                let updatedArray = [...cartItems, newItem];
+                setCartItems(updatedArray)
+            }
+        }
+        else {
+            let updatedArray = [...cartItems, newItem];
+            setCartItems(updatedArray)
+        }
     }
     
     return (
