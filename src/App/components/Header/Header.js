@@ -10,10 +10,10 @@ const Header = (props) => {
             <ul className="navbar-nav" style={{ flex:1,'display': 'flex', 'justifyContent': 'end', alignItems: "end" }}>
                 <li className="nav-item">
                     {/* <a className="nav-link" href="#">Cart</a> */}
-                    <CartButton />
+                    <CartButton cartLength={props?.cartLength} />
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Logout</a>
+                    <a className="nav-link" href="#">Login</a>
                 </li>
             </ul>
         </nav>

@@ -8,7 +8,7 @@ const CartButton = (props) => {
                 <CartIcon />
             </span>
             <span>Your cart</span>
-            <span className={styles.badge}>4</span>
+            <span className={styles.badge}>{props?.cartLength}</span>
         </button>
     )
 }
