@@ -27,7 +27,7 @@ const MealItem = (props) => {
                 <h4>{formatter.format(item?.price)}</h4>
 
                 <div className={styles.add2cart}>
-                    <input onChange={qtyHandler} value={qty} type='number' max='10' step='1' min='1' defaultValue= '1' className={styles.ip} />
+                    <input onChange={qtyHandler} value={qty} type='number' max='10' step='1' min='1' className={styles.ip} />
                     <button className={styles.button} onClick={addToCartHandler}>Add To Cart</button>
                 </div>
             </div>
