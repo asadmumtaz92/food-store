@@ -1,0 +1,21 @@
+.summary {
+    font-family: 'Courier New', Courier, monospace !important;
+    box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.25);
+    background-color: #00000099;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    padding: 20px 30px;
+    color: #FFFFFF;
+    font-weight: 700;
+    width: 50%;
+    margin: 0px auto;
+    margin-top: -10rem;
+}
+.summary h2 {
+    margin-bottom: 20px;
+    font-weight: 900;
+}
+.summary p {
+    text-align: center;
+}
