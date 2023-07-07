@@ -1,0 +1,140 @@
+.cart {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #FFFFFF;
+    margin-top: 55px;
+    padding: 1% 5%;
+    border: none;
+}
+.backButton {
+    background-color: transparent;
+    border: 1px solid lightgray;
+    letter-spacing: 1.3px;
+    border-radius: 5px;
+    padding: 0px 35px;
+    font-size: larger;
+    font-weight: 900;
+}
+.backButton:focus {
+    outline: none;
+}
+.noItem {
+    letter-spacing: 1.3px;
+    margin-top: 50px;
+    font-weight: 900;
+    text-align: center;
+}
+.body {
+    width: 80%;
+    margin: 0px auto;
+    margin-top: 20px;
+}
+.cartItem {
+    border-bottom: 1px solid lightgray;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-direction: row;
+    display: flex;
+}
+.image {
+    margin-right: 20px;
+    height: 100px;
+    width: 100px;
+}
+
+.descBox {
+    justify-content: space-between;
+    align-items: end;
+    flex-direction: row;
+    display: flex;
+    flex: 1;
+}
+.name {
+    text-align: left;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.qtyBox {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    margin-top: 0px;
+    flex: 1;
+    margin-bottom: -5px;
+}
+.minus {
+    background-color: rgb(232, 71, 71);
+    padding: 7px 12px 0px 12px;
+    font-weight: bolder;
+    align-items: center;
+    border-radius: 6px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0px;
+}
+.qty {
+    font-weight: bolder;
+    text-align: center;
+    padding: 4px 20px;
+    font-size: larger;
+    margin: 0px;
+}
+.plus {
+    background-color: rgb(12, 213, 62);
+    padding:7px 12px 0px 12px;
+    border-radius: 6px;
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: 700;
+    margin: 0px;
+}
+
+.total {
+    text-align: right !important;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.footer {
+    flex-direction: column;
+    margin: 0px auto;
+    margin-top: 50px;
+    display: flex;
+    width: 80%;
+}
+.priceBox {
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0 1%;
+    display: flex;
+    width: 100%;
+}
+.priceBox h4 {
+    font-weight: 700;
+}
+
+.footerAction {
+    justify-content: flex-end;
+    padding-right: 10px;
+    flex-direction: row;
+    margin: 10px auto;
+    display: flex;
+    width: 80%;
+}
+.ftr button {
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    padding: 5px 25px;
+    font-weight: 900;
+}
+
+@media (min-width: 300px) and (max-width: 1000px) {
+    .body, .footer, .footerAction{
+        width: 95%;
+    }
+}
