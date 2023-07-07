@@ -1,0 +1,69 @@
+.myNav {
+    background-color: white !important;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.26);
+    font-family: 'Courier New', Courier, monospace !important;
+}
+nav a {
+    color: #000000 !important;
+}
+.logo {
+    font-size: larger !important;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+}
+nav ul {
+    display: flex;
+    justify-content: end;
+}
+nav ul li {
+    padding: 0px 20px;
+}
+nav ul li a {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+}
+@media (min-width: 300px) and (max-width: 786px) {
+    nav ul {
+        display: flex;
+        flex: 1;
+    }
+}
+/* .myNav {
+    color: #000000;
+    padding: 0px 20px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.26);
+    align-items: center;
+    display: flex;
+    flex: 1;
+}
+
+.logo{
+    padding: 0;
+    margin: 0;
+    color: #000000;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: larger;
+}
+
+.ul {
+    display: flex;
+    flex: 1;
+    justify-content: end;
+    color: #000000 !important;
+
+}
+.li {
+    border-left: 0.9px solid lightgray;
+}
+.li:hover {
+    background-color: aqua;
+}
+.li a {
+    color: #000000 !important;
+}
+
+@media (min-width: 300px) and (max-width: 786px) {
+} */
