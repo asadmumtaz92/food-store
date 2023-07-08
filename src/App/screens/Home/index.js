@@ -91,10 +91,9 @@ const Home = (props) => {
     }
 
     let content = <>
-        <Header cartLength={cartItems?.length} />
         <HeaderImage />
-
         <MealSummary />
+
         <div className={`container`}>
             <h2 className={styles.title}>AVAILABLE FOODS</h2>
 
@@ -102,13 +101,13 @@ const Home = (props) => {
                 {DUMMY_MEALS.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
             </div>
         </div>
-
-        {/* CART MODAL */}
-        <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
     </>
     
     return (
         <Fragment>
+            <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} />
+            {/* CART MODAL */}
+            <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
             {activeScreen === 'Home'
                 ? content
                 : <Cart
