@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Cart.module.css'
 import { formatter } from '../../Helpers/CurrancyFormat'
-import Header from '../../components/Header/Header'
 import Button from '../../components/UI/Button'
 
 const Cart = (props) => {
@@ -75,8 +74,6 @@ const Cart = (props) => {
 
     return (
         <React.Fragment>
-            <Header cartLength={props?.cartItems?.length} />
-
             <div className={`container-fluid pb-3 mt-5 pt-4`}>
                 {/* HEADING SECTION */}
                 <div class="row">
