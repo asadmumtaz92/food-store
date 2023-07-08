@@ -20,6 +20,34 @@ const Home = (props) => {
         setCartItems(noEdit)
     }
 
+    const incrementHandler = (id) => {
+        const noEdit = cartItems.filter(item => item?.id !== id)
+        const editItem = cartItems.filter(item => item?.id === id)
+
+        let updatedItem = {
+            ...editItem[0],
+            qty: editItem[0].qty + 1
+        }
+        let newArray = [...noEdit, updatedItem]
+        setCartItems(newArray)
+    }
+
+    const decremetHandler = (id) => {
+        const noEdit = cartItems.filter(item => item?.id !== id)
+        const editItem = cartItems.filter(item => item?.id === id)
+        if (editItem[0].qty == 1) {
+            deleteItemHandler(editItem[0].id)
+        }
+        else {
+            let updatedItem = {
+                ...editItem[0],
+                qty: editItem[0].qty - 1
+            }
+            let newArray = [...noEdit, updatedItem]
+            setCartItems(newArray)
+        }
+    }
+
     const addToCart = (newItem) => {
         if (cartItems.length > 0) {
             const result = cartItems.filter(item => item?.id.toLowerCase().includes(newItem?.id.toLowerCase()))
@@ -83,7 +111,13 @@ const Home = (props) => {
         <Fragment>
             {activeScreen === 'Home'
                 ? content
-                : < Cart cartItems={cartItems} activeScreenHandler={activeScreenHandler} deleteItem={deleteItemHandler} />
+                : <Cart
+                    cartItems={cartItems}
+                    activeScreenHandler={activeScreenHandler}
+                    deleteItemHandler={deleteItemHandler}
+                    incrementHandler={incrementHandler}
+                    decremetHandler={decremetHandler}
+                />
             }
         </Fragment>
     );

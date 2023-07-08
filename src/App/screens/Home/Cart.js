@@ -22,7 +22,13 @@ const Cart = (props) => {
         let itemDetail = item?.item
 
         const deleteItemHandler = () => {
-            props?.deleteItem(itemDetail?.id)
+            props?.deleteItemHandler(itemDetail?.id)
+        }
+        const incrementHandler = () => {
+            props?.incrementHandler(itemDetail?.id)
+        }
+        const decremetHandler = () => {
+            props?.decremetHandler(itemDetail?.id)
         }
 
         return (
@@ -42,13 +48,14 @@ const Cart = (props) => {
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 mt-4 pt-3">
                     <div class="row justify-content-center">
                         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
-                            <button className={styles.qtyBtn}><i class="fa fa-minus-square" style={{ fontSize: 30, color: 'rgb(232, 71, 71)' }}></i></button>
+                            <button className={styles.qtyBtn} onClick={decremetHandler} ><i class="fa fa-minus-square" style={{ fontSize: 30, color: 'rgb(232, 71, 71)' }}></i></button>
                         </div>
+                        {/* decremetHandler */}
                         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-2">
                             <p className={styles.qty}>{itemDetail?.qty}</p>
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
-                            <button className={styles.qtyBtn}><i class="fa fa-plus-square" style={{ fontSize: 32, color: 'rgb(12, 213, 62)' }}></i></button>
+                            <button className={styles.qtyBtn} onClick={incrementHandler} ><i class="fa fa-plus-square" style={{ fontSize: 32, color: 'rgb(12, 213, 62)' }}></i></button>
                         </div>
                     </div>
                 </div>
