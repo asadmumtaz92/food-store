@@ -21,6 +21,10 @@ const Cart = (props) => {
     const CartItem = (item) => {
         let itemDetail = item?.item
 
+        const deleteItemHandler = () => {
+            props?.deleteItem(itemDetail?.id)
+        }
+
         return (
             <div class="row mt-3 justify-content-between" style={{ 'border-bottom': '1px solid lightgray' }}>
                 <div class="col-sm-2 col-md-2 col-lg-2 col-xl-1">
@@ -54,7 +58,7 @@ const Cart = (props) => {
                 </div>
 
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-1 mt-5 text-right">
-                    <Button onClick={() => { }} className={`${styles.delete}`}>
+                    <Button onClick={deleteItemHandler} className={`${styles.delete}`}>
                         <i class="fa fa-trash" style={{ fontSize: 26 }}></i>
                     </Button>
                 </div>

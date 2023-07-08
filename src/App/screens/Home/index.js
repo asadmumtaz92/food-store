@@ -15,6 +15,11 @@ const Home = (props) => {
     const [cartItems, setCartItems] = useState([])
     const [activeScreen, setActiveScreen] = useState('Home')
 
+    const deleteItemHandler = (id) => {
+        const noEdit = cartItems.filter(item => item?.id !== id)
+        setCartItems(noEdit)
+    }
+
     const addToCart = (newItem) => {
         if (cartItems.length > 0) {
             const result = cartItems.filter(item => item?.id.toLowerCase().includes(newItem?.id.toLowerCase()))
@@ -78,7 +83,7 @@ const Home = (props) => {
         <Fragment>
             {activeScreen === 'Home'
                 ? content
-                : < Cart cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
+                : < Cart cartItems={cartItems} activeScreenHandler={activeScreenHandler} deleteItem={deleteItemHandler} />
             }
         </Fragment>
     );
