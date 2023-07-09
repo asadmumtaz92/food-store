@@ -6,6 +6,7 @@ import MealItem from '../../components/Home/mealItem'
 import styles from './index.module.css'
 import CartModal from '../../customModals/CartModal';
 import Cart from './Cart';
+import Footer from '../../components/UI/Footer';
 
 import { DUMMY_MEALS } from '../../constantData/MealList'
 
@@ -105,7 +106,7 @@ const Home = (props) => {
     
     return (
         <Fragment>
-            <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} />
+            <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} />
             {/* CART MODAL */}
             <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
             {activeScreen === 'Home'
@@ -118,6 +119,7 @@ const Home = (props) => {
                     decremetHandler={decremetHandler}
                 />
             }
+            <Footer />
         </Fragment>
     );
 }
