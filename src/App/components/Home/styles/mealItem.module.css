@@ -9,6 +9,7 @@
     background-color: transparent;
     position: absolute;
     width:min-content;
+    cursor: pointer;
     border: none;
     right: 10px;
     top: 20px;
