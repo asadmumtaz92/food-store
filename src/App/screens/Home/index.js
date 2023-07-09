@@ -91,6 +91,11 @@ const Home = (props) => {
         }, 500);
     }
 
+    const OnConfirmOrder = () => {
+        setCartItems([])
+        setActiveScreen('Home')
+    }
+
     let content = <>
         <HeaderImage />
         <MealSummary />
@@ -117,6 +122,7 @@ const Home = (props) => {
                     deleteItemHandler={deleteItemHandler}
                     incrementHandler={incrementHandler}
                     decremetHandler={decremetHandler}
+                    OnConfirmOrder={OnConfirmOrder}
                 />
             }
             <Footer />

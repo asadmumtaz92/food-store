@@ -156,7 +156,13 @@ const Cart = (props) => {
                                         title="Confirm Order" className={styles.confirmBtn}
                                         onClick={() => {
                                             let num = Math.floor(Math.random() * (9990 - 1000 + 1)) + 1000
-                                            setTimeout(() => { alert(`\nYour order created seccessfully!\nOrder number is: ${num}.`) }, 1000)
+                                            setTimeout(() => {
+                                                alert(`\nYour order created seccessfully!\nOrder number is: ${num}.`)
+                                                setTimeout(() => {
+                                                    props?.OnConfirmOrder()
+                                                    setTotal(0)
+                                                }, 500);
+                                            }, 1000)
                                         }}
                                     />
                                 </div>
