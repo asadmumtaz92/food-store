@@ -9,8 +9,11 @@
 }
 .image {
     margin-right: 25px;
-    height: 90px;
-    width: 90px;
+    height: 70px;
+    width: 70px;
+}
+.image:hover {
+    scale: 1.4;
 }
 .text{
     font-weight: 700;
@@ -20,9 +23,8 @@
     border: none;
 }
 .qtyBtn:hover {
-    background-color: #f1f1f1;
-    border-radius: 4px;
-    padding-top: 4px;
+    cursor: pointer;
+    scale: 1.2;
 }
 .qtyBtn:focus, .qtyBtn:active, .qtyBtn:focus-visible{
     box-shadow: none;
@@ -47,6 +49,7 @@
 .delete:hover {
     color: rgb(232, 71, 71) !important;
     background-color: transparent !important;
+    scale: 1.2;
 }
 
 .confirmBtn {
