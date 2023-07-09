@@ -1,9 +1,22 @@
 .mealItem {
     font-family: 'Courier New', Courier, monospace !important;
     margin-bottom: 20px;
-    align-items: center;
+    /* align-items: center; */
     text-align: center;
     padding: 10px;
+}
+.fvrt {
+    background-color: transparent;
+    position: absolute;
+    width:min-content;
+    cursor: pointer;
+    border: none;
+    right: 10px;
+    top: 20px;
+}
+.fvrt:focus {
+    border: none;
+    outline: none;
 }
 .innerItem {
     box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.2);

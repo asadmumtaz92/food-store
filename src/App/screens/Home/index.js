@@ -6,6 +6,7 @@ import MealItem from '../../components/Home/mealItem'
 import styles from './index.module.css'
 import CartModal from '../../customModals/CartModal';
 import Cart from './Cart';
+import Footer from '../../components/UI/Footer';
 
 import { DUMMY_MEALS } from '../../constantData/MealList'
 
@@ -14,6 +15,39 @@ const Home = (props) => {
 
     const [cartItems, setCartItems] = useState([])
     const [activeScreen, setActiveScreen] = useState('Home')
+
+    const deleteItemHandler = (id) => {
+        const noEdit = cartItems.filter(item => item?.id !== id)
+        setCartItems(noEdit)
+    }
+
+    const incrementHandler = (id) => {
+        const noEdit = cartItems.filter(item => item?.id !== id)
+        const editItem = cartItems.filter(item => item?.id === id)
+
+        let updatedItem = {
+            ...editItem[0],
+            qty: editItem[0].qty + 1
+        }
+        let newArray = [...noEdit, updatedItem]
+        setCartItems(newArray)
+    }
+
+    const decremetHandler = (id) => {
+        const noEdit = cartItems.filter(item => item?.id !== id)
+        const editItem = cartItems.filter(item => item?.id === id)
+        if (editItem[0].qty == 1) {
+            deleteItemHandler(editItem[0].id)
+        }
+        else {
+            let updatedItem = {
+                ...editItem[0],
+                qty: editItem[0].qty - 1
+            }
+            let newArray = [...noEdit, updatedItem]
+            setCartItems(newArray)
+        }
+    }
 
     const addToCart = (newItem) => {
         if (cartItems.length > 0) {
@@ -58,10 +92,9 @@ const Home = (props) => {
     }
 
     let content = <>
-        <Header cartLength={cartItems?.length} />
         <HeaderImage />
-
         <MealSummary />
+
         <div className={`container`}>
             <h2 className={styles.title}>AVAILABLE FOODS</h2>
 
@@ -69,17 +102,24 @@ const Home = (props) => {
                 {DUMMY_MEALS.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
             </div>
         </div>
-
-        {/* CART MODAL */}
-        <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
     </>
     
     return (
         <Fragment>
+            <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} />
+            {/* CART MODAL */}
+            <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
             {activeScreen === 'Home'
                 ? content
-                : < Cart cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
+                : <Cart
+                    cartItems={cartItems}
+                    activeScreenHandler={activeScreenHandler}
+                    deleteItemHandler={deleteItemHandler}
+                    incrementHandler={incrementHandler}
+                    decremetHandler={decremetHandler}
+                />
             }
+            <Footer />
         </Fragment>
     );
 }
