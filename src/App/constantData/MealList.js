@@ -1,6 +1,13 @@
 import burger from '../assets/images/foodItemIcon.png'
 export const DUMMY_MEALS = [
     {
+        id: 'm0',
+        name: 'Biryani',
+        description: 'Rice, chicken, spicy...',
+        price: 10.99,
+        image: 'https://thebiryaniwalla.com/images/biryani-1.png',
+    },
+    {
         id: 'm1',
         name: 'Sushi',
         description: 'Finest fish and veggies',
@@ -34,5 +41,12 @@ export const DUMMY_MEALS = [
         description: 'Cheese...and chicken...',
         price: 28.99,
         image: 'https://png.pngtree.com/png-clipart/20211009/original/pngtree-real-steak-cheese-top-view-food-pizza-png-image_6846673.png',
+    },
+    {
+        id: 'm6',
+        name: 'BBQ Plater',
+        description: 'Chicken, meat, veggies',
+        price: 14.99,
+        image: 'https://images.squarespace-cdn.com/content/v1/57d11049f5e2315aa1308dd1/1490638332252-61DPSQOY01KS7JAUTDL0/Again+Re-Repeat+---recommended+---+Mixed+Platter.png?format=1000w',
     },
 ];
