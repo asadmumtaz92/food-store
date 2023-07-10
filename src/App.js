@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
-import styles from './App.module.css';
+import React, { Fragment} from 'react'
 import Home from './App/screens/Home/index'
 
-function App() {
+
+const App = () => {
     return (
         <Fragment>
             <Home />
         </Fragment>
-    );
+    )
 }
 
-export default App;
+export default App
