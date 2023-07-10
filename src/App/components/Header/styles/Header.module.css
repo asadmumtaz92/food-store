@@ -13,8 +13,10 @@ nav a {
     letter-spacing: 1.4px;
 }
 nav ul {
-    display: flex;
     justify-content: end;
+    align-items: end;
+    display: flex;
+    flex: 1;
 }
 nav ul li {
     padding: 0px 20px;
