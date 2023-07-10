@@ -79,7 +79,7 @@ const Cart = (props) => {
 
     return (
         <React.Fragment>
-            <div className={`container-fluid mt-5 pt-4`}>
+            <div className={`container-fluid mt-5 pt-4`} style={{minHeight:'87vh'}}>
                 {/* HEADING SECTION */}
                 <div class="row">
                     <div class="col-sm-4 col-md-3 col-lg-3 col-xl-3 text-center">
