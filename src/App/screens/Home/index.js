@@ -1,26 +1,26 @@
-import React, { Fragment, useState } from 'react';
-import Header from '../../components/Header/Header';
-import HeaderImage from '../../components/Home/HeaderImage';
-import MealSummary from '../../components/Home/mealSummary';
+import React, { Fragment, useState, useEffect } from 'react'
+import Header from '../../components/Header/Header'
+import HeaderImage from '../../components/Home/HeaderImage'
+import MealSummary from '../../components/Home/mealSummary'
 import MealItem from '../../components/Home/mealItem'
 import styles from './index.module.css'
-import CartModal from '../../customModals/CartModal';
-import Cart from './Cart';
-import Footer from '../../components/UI/Footer';
+import CartModal from '../../customModals/CartModal'
+import Cart from './Cart'
+import Footer from '../../components/UI/Footer'
 
 import { DUMMY_MEALS } from '../../constantData/MealList'
+import Login from '../Login/index'
 
 
 const Home = (props) => {
 
     const [cartItems, setCartItems] = useState([])
-    const [activeScreen, setActiveScreen] = useState('Home')
+    const [activeScreen, setActiveScreen] = useState('Login')
 
     const deleteItemHandler = (id) => {
         const noEdit = cartItems.filter(item => item?.id !== id)
         setCartItems(noEdit)
     }
-
     const incrementHandler = (id) => {
         const noEdit = cartItems.filter(item => item?.id !== id)
         const editItem = cartItems.filter(item => item?.id === id)
@@ -32,11 +32,10 @@ const Home = (props) => {
         let newArray = [...noEdit, updatedItem]
         setCartItems(newArray)
     }
-
     const decremetHandler = (id) => {
         const noEdit = cartItems.filter(item => item?.id !== id)
         const editItem = cartItems.filter(item => item?.id === id)
-        if (editItem[0].qty == 1) {
+        if (editItem[0].qty === 1) {
             deleteItemHandler(editItem[0].id)
         }
         else {
@@ -48,7 +47,6 @@ const Home = (props) => {
             setCartItems(newArray)
         }
     }
-
     const addToCart = (newItem) => {
         if (cartItems.length > 0) {
             const result = cartItems.filter(item => item?.id.toLowerCase().includes(newItem?.id.toLowerCase()))
@@ -90,44 +88,62 @@ const Home = (props) => {
             setActiveScreen(screen)
         }, 500);
     }
-
     const OnConfirmOrder = () => {
         setCartItems([])
         setActiveScreen('Home')
     }
 
-    let content = <>
-        <HeaderImage />
-        <MealSummary />
+    useEffect(() => {
+        let vv = localStorage.getItem('Login')
+        setActiveScreen(vv)
+    }, [])
 
-        <div className={`container`}>
-            <h2 className={styles.title}>AVAILABLE FOODS</h2>
+    let content 
+    if (activeScreen === 'Login') {
+        content = <Login activeScreenHandler={activeScreenHandler} />
+    }
+    else if (activeScreen === 'Checkout') {
+        content = <Cart
+            cartItems={cartItems}
+            activeScreenHandler={activeScreenHandler}
+            deleteItemHandler={deleteItemHandler}
+            incrementHandler={incrementHandler}
+            decremetHandler={decremetHandler}
+            OnConfirmOrder={OnConfirmOrder}
+        />
+    }
+    else if (activeScreen === 'Home') {
+       content =  <>
+            <HeaderImage />
+            <MealSummary />
 
-            <div className={`row ${styles.myRow}`} >
-                {DUMMY_MEALS.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
+            <div className={`container`}>
+                <h2 className={styles.title}>AVAILABLE FOODS</h2>
+
+                <div className={`row ${styles.myRow}`}>
+                    {DUMMY_MEALS.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
+                </div>
             </div>
-        </div>
-    </>
+        </>
+    }
+
     
     return (
         <Fragment>
-            <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} />
-            {/* CART MODAL */}
-            <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
-            {activeScreen === 'Home'
-                ? content
-                : <Cart
-                    cartItems={cartItems}
-                    activeScreenHandler={activeScreenHandler}
-                    deleteItemHandler={deleteItemHandler}
-                    incrementHandler={incrementHandler}
-                    decremetHandler={decremetHandler}
-                    OnConfirmOrder={OnConfirmOrder}
-                />
+            {(activeScreen === 'Home' || activeScreen === 'Checkout')
+                && <>
+                <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} OnConfirmOrder={OnConfirmOrder} />
+                    {/* CART MODAL */}
+                    <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
+                </>
             }
-            <Footer />
+            {content}
+
+            {/* FOOTER */}
+            <Footer screen={activeScreen} />
+
         </Fragment>
-    );
+    )
 }
 
 export default Home;

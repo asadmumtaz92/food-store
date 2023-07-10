@@ -36,7 +36,7 @@ const MealItem = (props) => {
                         </svg>
                     }
                 </button>
-                <img src={item?.image} alt={'food image...'} className={styles.image} />
+                <img src={item?.image} alt={'food image...'} className={`${styles.image}`} />
                 <h3>{item?.name}</h3>
                 <p>{item?.description}</p>
                 <h4>{formatter.format(item?.price)}</h4>
