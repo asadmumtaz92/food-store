@@ -23,7 +23,7 @@ const CartModal = (props) => {
 
         return (
             <div className={styles.cartItem}>
-                <img src={itemDetail?.image} alt='Cart food image...' className={styles.image} />
+                <img src={itemDetail?.logo} alt='Cart food image...' className={styles.image} />
 
                 <div className={styles.descBox}>
                     <p className={styles.title}>{itemDetail?.name}</p>
