@@ -7,15 +7,16 @@ import styles from './index.module.css'
 import CartModal from '../../customModals/CartModal'
 import Cart from './Cart'
 import Footer from '../../components/UI/Footer'
-
-import { DUMMY_MEALS } from '../../constantData/MealList'
 import Login from '../Login/index'
 
 
 const Home = (props) => {
 
+    const [products, setProducts] = useState([])
     const [cartItems, setCartItems] = useState([])
     const [activeScreen, setActiveScreen] = useState('Login')
+    const [isLoading, setIsLoading] = useState(false)
+    const [httpError, setHttpError] = useState('')
 
     const deleteItemHandler = (id) => {
         const noEdit = cartItems.filter(item => item?.id !== id)
@@ -93,9 +94,42 @@ const Home = (props) => {
         setActiveScreen('Home')
     }
 
+    const fetchItems = async () => {
+        setIsLoading(true)
+        setHttpError('')
+        const response = await fetch('https://reactjs-app-aa583-default-rtdb.firebaseio.com/meals.json')
+
+        if (!response.ok) {
+            throw new Error(response?.statusText);
+        }
+
+        let data = await response.json()
+        const loadedItems = []
+
+        for (const key in data) {
+            loadedItems.push({
+                id: key,
+                name: data[key].name,
+                description: data[key].description,
+                price: data[key].price,
+                logo: data[key].logo,
+            })
+        }
+        setProducts(loadedItems)
+        setIsLoading(false)
+    }
+
     useEffect(() => {
         let vv = localStorage.getItem('Login')
         setActiveScreen(vv)
+
+        const getitem = async () => {
+            await fetchItems().catch(error => {
+                setIsLoading(false)
+                setHttpError(error.message)
+            })
+        }
+        getitem()
     }, [])
 
     let content 
@@ -118,10 +152,15 @@ const Home = (props) => {
             <MealSummary />
 
             <div className={`container`}>
-                <h2 className={styles.title}>AVAILABLE FOODS</h2>
+               <h2 className={styles.title}>AVAILABLE FOODS</h2>
+               
+               {httpError
+                   ? <p className={`text-center mt-5 font-weight-bold`}>{httpError}</p>
+                   : isLoading && <p className={`text-center mt-5 font-weight-bold`}>Loading...</p>
+               }
 
                 <div className={`row ${styles.myRow}`}>
-                    {DUMMY_MEALS.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
+                   {products.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
                 </div>
             </div>
         </>

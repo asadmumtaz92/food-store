@@ -1,19 +1,19 @@
 import burger from '../assets/images/foodItemIcon.png'
 export const DUMMY_MEALS = [
-    {
-        id: 'm0',
-        name: 'Biryani',
-        description: 'Rice, chicken, spicy...',
-        price: 10.99,
-        image: 'https://thebiryaniwalla.com/images/biryani-1.png',
-    },
-    {
-        id: 'm1',
-        name: 'Sushi',
-        description: 'Finest fish and veggies',
-        price: 22.99,
-        image: 'https://static.wixstatic.com/media/d92b55_fb6f2e9db9f648a481576c2da803a280~mv2.png/v1/crop/x_45,y_0,w_544,h_488/fill/w_560,h_504,al_c,lg_1,q_85,enc_auto/2.png',
-    },
+    // {
+    //     id: 'm0',
+    //     name: 'Biryani',
+    //     description: 'Rice, chicken, spicy...',
+    //     price: 10.99,
+    //     image: 'https://thebiryaniwalla.com/images/biryani-1.png',
+    // },
+    // {
+    //     id: 'm1',
+    //     name: 'Sushi',
+    //     description: 'Finest fish and veggies',
+    //     price: 22.99,
+    //     image: 'https://static.wixstatic.com/media/d92b55_fb6f2e9db9f648a481576c2da803a280~mv2.png/v1/crop/x_45,y_0,w_544,h_488/fill/w_560,h_504,al_c,lg_1,q_85,enc_auto/2.png',
+    // },
     {
         id: 'm2',
         name: 'Schnitzel',
