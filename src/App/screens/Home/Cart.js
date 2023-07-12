@@ -258,7 +258,7 @@ const Cart = (props) => {
 
                                 {/* <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4"></div> */}
                             </>
-                            : isLoading && <p className={`text-center pt-5 pb-4 font-weight-bold`}>Processing wait...</p>
+                            : isLoading && <p className={`text-center pt-5 pb-4 font-weight-bold`}><i class="fa fa fa-spinner fa-spin"></i> Processing wait...</p>
                         }
                     </div>
                 </div>

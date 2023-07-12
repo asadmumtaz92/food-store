@@ -157,7 +157,7 @@ const Home = (props) => {
                
                {httpError
                    ? <p className={`text-center mt-5 font-weight-bold`}>{httpError}</p>
-                   : isLoading && <p className={`text-center mt-5 font-weight-bold`}>Loading...</p>
+                   : isLoading && <p className={`text-center mt-5 font-weight-bold`}><i class="fa fa fa-spinner fa-spin"></i> Loading...</p>
                }
 
                 <div className={`row ${styles.myRow}`}>

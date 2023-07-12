@@ -95,8 +95,8 @@ const Orders = (props) => {
             <div className={`row justify-content-center bg-dark pt-5 pb-2`}>
                 <div className={`col-sm-11 col-md-9 col-lg-9 col-xl-9`}>
 
-                    {httpError && <p className={`text-center mt-5 mb-5 font-weight-bold`}>{httpError}</p>}
-                    {isLoading && <p className={`text-center mt-5 mb-5 font-weight-bold bg-white`}>Loading...</p>}
+                    {httpError && <p className={`text-center mt-2 mb-5 p-5 rounded font-weight-bold bg-white`}>{httpError}</p>}
+                    {isLoading && <p className={`text-center mt-2 mb-5 p-5 rounded font-weight-bold bg-white ${styles.m0}`}><i class="fa fa fa-spinner fa-spin"></i> Loading...</p>}
 
                     {order?.length > 0 && !isLoading
                         ? order.map(item => <OrderItem item={item} /> )
