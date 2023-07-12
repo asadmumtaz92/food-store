@@ -8,6 +8,7 @@ import CartModal from '../../customModals/CartModal'
 import Cart from './Cart'
 import Footer from '../../components/UI/Footer'
 import Login from '../Login/index'
+import Orders from './Orders'
 
 
 const Home = (props) => {
@@ -165,13 +166,16 @@ const Home = (props) => {
             </div>
         </>
     }
+    else if (activeScreen === 'Orders') {
+        content = <Orders activeScreenHandler={activeScreenHandler} />
+    }
 
     
     return (
         <Fragment>
-            {(activeScreen === 'Home' || activeScreen === 'Checkout')
+            {(activeScreen === 'Home' || activeScreen === 'Checkout' || activeScreen === 'Orders')
                 && <>
-                <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} OnConfirmOrder={OnConfirmOrder} />
+                    <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} OnConfirmOrder={OnConfirmOrder} />
                     {/* CART MODAL */}
                     <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
                 </>
