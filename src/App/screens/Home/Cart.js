@@ -49,7 +49,7 @@ const Cart = (props) => {
             : false
 
         let orderDetail = {
-            orderDare: (new Date()).toString().substring(4, 21),
+            orderDate: (new Date()).toString().substring(4, 21),
             orderNo: Math.floor(Math.random() * (9990 - 1000 + 1)) + 1000
         }
         let userInfo = {
@@ -258,7 +258,7 @@ const Cart = (props) => {
 
                                 {/* <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4"></div> */}
                             </>
-                            : isLoading && <p className={`text-center pt-5 pb-4 font-weight-bold`}>Processing wait...</p>
+                            : isLoading && <p className={`text-center pt-5 pb-4 font-weight-bold`}><i class="fa fa fa-spinner fa-spin"></i> Processing wait...</p>
                         }
                     </div>
                 </div>

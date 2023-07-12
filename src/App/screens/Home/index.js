@@ -8,6 +8,7 @@ import CartModal from '../../customModals/CartModal'
 import Cart from './Cart'
 import Footer from '../../components/UI/Footer'
 import Login from '../Login/index'
+import Orders from './Orders'
 
 
 const Home = (props) => {
@@ -156,7 +157,7 @@ const Home = (props) => {
                
                {httpError
                    ? <p className={`text-center mt-5 font-weight-bold`}>{httpError}</p>
-                   : isLoading && <p className={`text-center mt-5 font-weight-bold`}>Loading...</p>
+                   : isLoading && <p className={`text-center mt-5 font-weight-bold`}><i class="fa fa fa-spinner fa-spin"></i> Loading...</p>
                }
 
                 <div className={`row ${styles.myRow}`}>
@@ -165,13 +166,16 @@ const Home = (props) => {
             </div>
         </>
     }
+    else if (activeScreen === 'Orders') {
+        content = <Orders activeScreenHandler={activeScreenHandler} />
+    }
 
     
     return (
         <Fragment>
-            {(activeScreen === 'Home' || activeScreen === 'Checkout')
+            {(activeScreen === 'Home' || activeScreen === 'Checkout' || activeScreen === 'Orders')
                 && <>
-                <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} OnConfirmOrder={OnConfirmOrder} />
+                    <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} OnConfirmOrder={OnConfirmOrder} />
                     {/* CART MODAL */}
                     <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
                 </>

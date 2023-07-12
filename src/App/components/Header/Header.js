@@ -22,15 +22,25 @@ const Header = (props) => {
                         <Button title="Logout" onClick={logoutHandler} />
                     </li>
                 }
-                {props?.activeScreenName == 'Home'
-                    ? props?.cartLength > 0
+                {(props?.activeScreenName !== 'Login' && props?.activeScreenName !== 'Orders')
+                    && <li className="nav-item">
+                        <Button title="Orders" onClick={() => { props?.activeScreenHandler('Orders') }} className={{padding:'8px 15px !important'}} />
+                    </li>
+                }
+                {(props?.activeScreenName !== 'Login' && props?.activeScreenName !== 'Home')
+                    && <li className="nav-item">
+                        <Button title="Home" onClick={() => { props?.activeScreenHandler('Home') }} className={{ padding: '8px 15px !important' }} />
+                    </li>
+                }
+                {(props?.activeScreenName !== 'Login' && props?.activeScreenName !== 'Checkout')
+                    && props?.cartLength > 0
                         && <li className="nav-item">
                             <Button title="Checkout" onClick={() => { props?.activeScreenHandler('Checkout') }} />
                         </li>
-                    : <li className="nav-item">
-                        <Button title="Home" onClick={() => { props?.activeScreenHandler('Home') }} />
-                        {/* <a className="nav-link" href="#">Checkout</a> */}
-                    </li>
+                    // : <li className="nav-item">
+                    //     <Button title="Home" onClick={() => { props?.activeScreenHandler('Home') }} />
+                    //     {/* <a className="nav-link" href="#">Checkout</a> */}
+                    // </li>
                 }
                 <li className="nav-item">
                     <CartButton cartLength={props?.cartLength} />
