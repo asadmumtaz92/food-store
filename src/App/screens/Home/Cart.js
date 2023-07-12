@@ -49,7 +49,7 @@ const Cart = (props) => {
             : false
 
         let orderDetail = {
-            orderDare: (new Date()).toString().substring(4, 21),
+            orderDate: (new Date()).toString().substring(4, 21),
             orderNo: Math.floor(Math.random() * (9990 - 1000 + 1)) + 1000
         }
         let userInfo = {
