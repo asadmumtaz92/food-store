@@ -50,7 +50,7 @@ const SimpleInput = (props) => {
   return (
     <form onSubmit={formSubmissionHandler}>
       <div className={nameInputClasses}>
-        <label htmlFor='name'>Your Name</label>
+        <label>Your Name</label>
         <input
           type='text'
           id='name'
@@ -63,7 +63,7 @@ const SimpleInput = (props) => {
         )}
       </div>
       <div className={emailInputClasses}>
-        <label htmlFor='email'>Your E-Mail</label>
+        <label >Your E-Mail</label>
         <input
           type='email'
           id='email'

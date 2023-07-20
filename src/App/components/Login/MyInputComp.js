@@ -9,7 +9,7 @@ const MyInputComp = ({
 }) => {
     return (
         <div className={`form-group`}>
-            <label for="uname" style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing:1.3 }}>{label}:</label>
+            <label htmlFor="uname" style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing:1.3 }}>{label}:</label>
             <input
                 required
                 id={label}

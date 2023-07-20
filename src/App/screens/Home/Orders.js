@@ -67,8 +67,8 @@ const Orders = (props) => {
                         )
                     })}
                 </div>
-                <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1" />
-                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1" />
+                <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <h6 className={`text-capitalize`}><span className={`font-weight-bold`}>Name:</span> {userInfo?.name}</h6>
                     <h6 className={`text-capitalize`}><span className={`font-weight-bold`}>Contact:</span> {userInfo?.contact}</h6>
                     <h6 className={`text-capitalize`}><span className={`font-weight-bold`}>Address:</span> {`${userInfo?.street} ${userInfo?.area} ${userInfo?.city}  ${userInfo?.postalCode}`}</h6>
@@ -96,7 +96,7 @@ const Orders = (props) => {
                 <div className={`col-sm-11 col-md-9 col-lg-9 col-xl-9`}>
 
                     {httpError && <p className={`text-center mt-2 mb-5 p-5 rounded font-weight-bold bg-white`}>{httpError}</p>}
-                    {isLoading && <p className={`text-center mt-2 mb-5 p-5 rounded font-weight-bold bg-white ${styles.m0}`}><i class="fa fa fa-spinner fa-spin"></i> Loading...</p>}
+                    {isLoading && <p className={`text-center mt-2 mb-5 p-5 rounded font-weight-bold bg-white ${styles.m0}`}><i className={`fa fa fa-spinner fa-spin`}></i> Loading...</p>}
 
                     {order?.length > 0 && !isLoading
                         ? order.map(item => <OrderItem item={item} /> )
