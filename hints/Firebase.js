@@ -126,11 +126,11 @@ const Firebase = () => {
     return (
         <div style={{ width: '50%', margin: 'auto' }}>
             <div style={{ width: '100%', margin: 'auto' }} className={`bg-dark p-5 mt-4 rounded`}>
-                <input type="text" class="form-control" value={title} onChange={titleHandler} placeholder="Enter movie title..." />
-                <input type="date" class="form-control mt-4" value={releasedDate} onChange={releasedDateHandler} placeholder="Enter released data..." />
-                <button class="btn btn-info form-control fw-bold mt-5" onClick={sendData}>Submit</button>
+                <input type="text" className="form-control" value={title} onChange={titleHandler} placeholder="Enter movie title..." />
+                <input type="date" className="form-control mt-4" value={releasedDate} onChange={releasedDateHandler} placeholder="Enter released data..." />
+                <button className="btn btn-info form-control fw-bold mt-5" onClick={sendData}>Submit</button>
             </div>
-            {/* <button class="btn btn-info col-xl-6 offset-lg-3 text-center form-control mt-5 text-capitalize" onClick={() => fd()}>FETCH DATA</button> */}
+            {/* <button className="btn btn-info col-xl-6 offset-lg-3 text-center form-control mt-5 text-capitalize" onClick={() => fd()}>FETCH DATA</button> */}
 
             {movieList?.length > 0
                 && movieList.map(item => {
