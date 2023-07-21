@@ -1,4 +1,6 @@
-const MyInputComp = ({
+import styles from './styles/MyInput.module.css'
+
+const MyInput = ({
     label,
     type = 'text',
     className,
@@ -9,7 +11,7 @@ const MyInputComp = ({
 }) => {
     return (
         <div className={`form-group`}>
-            <label htmlFor="uname" style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing:1.3 }}>{label}:</label>
+            <label htmlFor="uname" className={`${styles.label}`}>{label}:</label>
             <input
                 required
                 id={label}
@@ -19,11 +21,10 @@ const MyInputComp = ({
                 onBlur={onBlurHandler}
                 placeholder={placeholder}
                 onChange={onChangeHandler}
-                className={`form-control ${className}`}
-                style={{ fontWeight: 700, letterSpacing: 1.3 }}
+                className={`form-control ${styles.ip} ${className}`}
             />
         </div>
     )
 }
 
-export default MyInputComp
+export default MyInput

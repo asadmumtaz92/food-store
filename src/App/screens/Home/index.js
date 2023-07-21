@@ -7,7 +7,7 @@ import styles from './index.module.css'
 import CartModal from '../../customModals/CartModal'
 import Cart from './Cart'
 import Footer from '../../components/UI/Footer'
-import Login from '../Login/index'
+import Login from '../Login/Login'
 import Orders from './Orders'
 
 
