@@ -10,10 +10,15 @@ import Footer from '../../components/UI/Footer'
 import Login from '../Login/index'
 import Orders from './Orders'
 
+// redux
+import { connect } from 'react-redux';
+import { getProducts } from '../../redux/actions/productActions' 
+import { setUserInfo, setUserLoginStatus } from '../../redux/actions/userActions'
+
 
 const Home = (props) => {
 
-    const [products, setProducts] = useState([])
+    // const [products, setProducts] = useState([])
     const [cartItems, setCartItems] = useState([])
     const [activeScreen, setActiveScreen] = useState('Login')
     const [isLoading, setIsLoading] = useState(false)
@@ -88,49 +93,57 @@ const Home = (props) => {
     const activeScreenHandler = (screen) => {
         setTimeout(() => {
             setActiveScreen(screen)
-        }, 500);
+        }, 500)
     }
     const OnConfirmOrder = () => {
         setCartItems([])
         setActiveScreen('Home')
     }
 
-    const fetchItems = async () => {
-        setIsLoading(true)
-        setHttpError('')
-        const response = await fetch('https://reactjs-app-aa583-default-rtdb.firebaseio.com/meals.json')
-
-        if (!response.ok) {
-            throw new Error(response?.statusText);
-        }
-
-        let data = await response.json()
-        const loadedItems = []
-
-        for (const key in data) {
-            loadedItems.push({
-                id: key,
-                name: data[key].name,
-                description: data[key].description,
-                price: data[key].price,
-                logo: data[key].logo,
-            })
-        }
-        setProducts(loadedItems)
-        setIsLoading(false)
+    const logoutHandler = () => {
+        setCartItems([])
+        setActiveScreen('Login')
+        props?.setUserLoginStatus(false)
+        props?.setUserInfo({})
+        localStorage.removeItem('Email')
+        localStorage.setItem('Login', 'Login')
     }
 
+    // const fetchItems = async () => {
+    //     setIsLoading(true)
+    //     setHttpError('')
+    //     const response = await fetch('https://reactjs-app-aa583-default-rtdb.firebaseio.com/meals.json')
+
+    //     if (!response.ok) {
+    //         throw new Error(response?.statusText);
+    //     }
+
+    //     let data = await response.json()
+    //     const loadedItems = []
+
+    //     for (const key in data) {
+    //         loadedItems.push({
+    //             id: key,
+    //             name: data[key].name,
+    //             description: data[key].description,
+    //             price: data[key].price,
+    //             logo: data[key].logo,
+    //         })
+    //     }
+    //     setProducts(loadedItems)
+    //     setIsLoading(false)
+    // }
+
     useEffect(() => {
+        props?.getProducts()
         let vv = localStorage.getItem('Login')
         setActiveScreen(vv)
 
-        const getitem = async () => {
-            await fetchItems().catch(error => {
-                setIsLoading(false)
-                setHttpError(error.message)
-            })
-        }
-        getitem()
+        props?.setUserLoginStatus(vv === 'Login' ? false : true)
+        let email = localStorage.getItem('Email')
+        props?.setUserInfo({
+            email: email,
+        })
     }, [])
 
     let content 
@@ -154,14 +167,14 @@ const Home = (props) => {
 
             <div className={`container`}>
                <h2 className={styles.title}>AVAILABLE FOODS</h2>
-               
+
                {httpError
                    ? <p className={`text-center mt-5 font-weight-bold`}>{httpError}</p>
-                   : isLoading && <p className={`text-center mt-5 font-weight-bold`}><i class="fa fa fa-spinner fa-spin"></i> Loading...</p>
+                   : isLoading && <p className={`text-center mt-5 font-weight-bold`}><i className="fa fa fa-spinner fa-spin"></i> Loading...</p>
                }
 
                 <div className={`row ${styles.myRow}`}>
-                   {products.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
+                   {props?.productReducer?.productList.map(item => <MealItem item={item} key={item?.id} addToCart={addToCart} />)}
                 </div>
             </div>
         </>
@@ -170,13 +183,12 @@ const Home = (props) => {
         content = <Orders activeScreenHandler={activeScreenHandler} />
     }
 
-    
+
     return (
         <Fragment>
             {(activeScreen === 'Home' || activeScreen === 'Checkout' || activeScreen === 'Orders')
                 && <>
-                    <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} OnConfirmOrder={OnConfirmOrder} />
-                    {/* CART MODAL */}
+                    <Header cartLength={cartItems?.length} activeScreenHandler={activeScreenHandler} activeScreenName={activeScreen} logoutHandler={logoutHandler} />
                     <CartModal cartItems={cartItems} activeScreenHandler={activeScreenHandler} />
                 </>
             }
@@ -189,4 +201,11 @@ const Home = (props) => {
     )
 }
 
-export default Home;
+const mapStateToProps = ({ productReducer, userReducer }) => ({ productReducer, userReducer })
+
+export default connect(mapStateToProps, {
+    getProducts,
+    // user 
+    setUserInfo,
+    setUserLoginStatus
+})(Home)

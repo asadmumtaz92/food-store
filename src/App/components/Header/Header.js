@@ -7,9 +7,7 @@ import Button from "../UI/Button"
 const Header = (props) => {
 
     const logoutHandler = () => {
-        props?.OnConfirmOrder()
-        localStorage.setItem('Login', 'Login')
-        props?.activeScreenHandler('Login')
+        props?.logoutHandler()
     }
 
 

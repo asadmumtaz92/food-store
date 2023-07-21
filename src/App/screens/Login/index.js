@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import styles from './index.module.css'
 import MyInputComp from '../../components/Login/MyInputComp'
 
+// redux
+import { connect } from 'react-redux';
+import { setUserInfo, setUserLoginStatus } from '../../redux/actions/userActions'
 
-const InputAndForm = (props) => {
+
+const Login = (props) => {
 
     const [email, setEmail] = useState('')
     const [emailError, setEmailError] = useState(false)
@@ -38,10 +42,16 @@ const InputAndForm = (props) => {
     const submitFormHandler = (event) => {
         event.preventDefault();
         if (!disabled) {
+            props?.setUserLoginStatus(true)
+            props?.setUserInfo({
+                email: email,
+                pw: password
+            })
             setEmail('')
             setEmailError(false)
             setPassword('')
             setPasswordError(false)
+            localStorage.setItem('Email', email)
             localStorage.setItem('Login', 'Home')
             props?.activeScreenHandler('Home')
         }
@@ -88,4 +98,10 @@ const InputAndForm = (props) => {
         </div>
     )
 }
-export default InputAndForm
+
+const mapStateToProps = ({ userReducer }) => ({ userReducer })
+
+export default connect(mapStateToProps, {
+    setUserInfo,
+    setUserLoginStatus
+})(Login)

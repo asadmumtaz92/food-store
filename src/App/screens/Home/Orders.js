@@ -3,47 +3,45 @@ import Button from '../../components/UI/Button'
 import styles from './orders.module.css'
 import { formatter } from '../../Helpers/CurrancyFormat'
 
+// redux
+import { connect } from 'react-redux';
+import { getOrders } from '../../redux/actions/orderActions'
+
 
 const Orders = (props) => {
 
-    const [order, setOrder] = useState([])
+    // const [order, setOrder] = useState(props?.orderReducer?.orderList)
     const [isLoading, setIsLoading] = useState(false)
     const [httpError, setHttpError] = useState('')
 
-    const fetchOrders = async () => {
-        setIsLoading(true)
-        setHttpError('')
-        const response = await fetch('https://reactjs-app-aa583-default-rtdb.firebaseio.com/orders.json')
+    // const fetchOrders = async () => {
+    //     setIsLoading(true)
+    //     setHttpError('')
+    //     const response = await fetch('https://reactjs-app-aa583-default-rtdb.firebaseio.com/orders.json')
 
-        if (response.ok) {
-            let data = await response.json()
-            const loadedItems = []
+    //     if (response.ok) {
+    //         let data = await response.json()
+    //         const loadedItems = []
 
-            for (const key in data) {
-                loadedItems.push({
-                    products: data[key].products,
-                    userInfo: data[key].userInfo,
-                    paymentDetail: data[key].paymentDetail,
-                    orderDetail: data[key].orderDetail
-                })
-            }
-            setOrder(loadedItems)
-        }
-        else {
-            setHttpError(response?.statusText)
-            throw new Error(response?.statusText)
-        }
-        setIsLoading(false)
-    }
+    //         for (const key in data) {
+    //             loadedItems.push({
+    //                 products: data[key].products,
+    //                 userInfo: data[key].userInfo,
+    //                 paymentDetail: data[key].paymentDetail,
+    //                 orderDetail: data[key].orderDetail
+    //             })
+    //         }
+    //         setOrder(loadedItems)
+    //     }
+    //     else {
+    //         setHttpError(response?.statusText)
+    //         throw new Error(response?.statusText)
+    //     }
+    //     setIsLoading(false)
+    // }
     
     useEffect(() => {
-        const getOrders = async () => {
-            await fetchOrders().catch(error => {
-                setIsLoading(false)
-                setHttpError(error.message)
-            })
-        }
-        getOrders()
+        props?.getOrders()
     }, [])
 
     const OrderItem = (item) => {
@@ -96,11 +94,11 @@ const Orders = (props) => {
                 <div className={`col-sm-11 col-md-9 col-lg-9 col-xl-9`}>
 
                     {httpError && <p className={`text-center mt-2 mb-5 p-5 rounded font-weight-bold bg-white`}>{httpError}</p>}
-                    {isLoading && <p className={`text-center mt-2 mb-5 p-5 rounded font-weight-bold bg-white ${styles.m0}`}><i className={`fa fa fa-spinner fa-spin`}></i> Loading...</p>}
+                    {isLoading && <p className={`text-center mt-2 mb-5 p-5 rounded font-weight-bold bg-white ${styles.m0}`}><i className={`fa fa fa-spinner fa-spin`}></i>  Loading...</p>}
 
-                    {order?.length > 0 && !isLoading
-                        ? order.map(item => <OrderItem item={item} /> )
-                        : !isLoading && <p className={`text-center mt-5 mb-5 font-weight-bold`}>You don't have any order</p>
+                    {props?.orderReducer?.orderList?.length > 0 && !isLoading
+                        ? props?.orderReducer?.orderList.map(item => <OrderItem item={item} /> )
+                        : !isLoading && <p className={`text-center mt-5 mb-5 p-5 rounded font-weight-bold bg-white`}>You don't have any order</p>
                     }
 
                 </div>
@@ -109,4 +107,8 @@ const Orders = (props) => {
     )
 }
 
-export default Orders
+const mapStateToProps = ({ orderReducer }) => ({ orderReducer })
+
+export default connect(mapStateToProps, {
+    getOrders
+})(Orders)
